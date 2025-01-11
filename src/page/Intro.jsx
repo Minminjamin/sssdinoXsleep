@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../style/Intro.css";
 
-const Intro = () => {
+const Intro = ({ onComplete }) => {
   const startDay = new Date("2024-12-07");
   const today = new Date();
   const dDay = Math.ceil((today - startDay) / (1000 * 60 * 60 * 24));
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      onComplete();
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, [onComplete]);
 
   return (
     <article>

@@ -1,11 +1,17 @@
 import "./App.css";
 import { Canvas } from "@react-three/fiber";
-import React, { Suspense, useRef } from "react";
+import React, { Suspense, useEffect, useRef, useState } from "react";
 import { OrbitControls, Stars } from "@react-three/drei";
 import Intro from "./page/Intro";
+import Vertification from "./page/Vertification";
 
 function App() {
+  const [currentPage, setCurrentPage] = useState("intro");
   const cameraRef = useRef(null);
+
+  useEffect(() => {
+    console.log(currentPage);
+  }, [currentPage]);
 
   const container = {
     position: "relative",
@@ -34,13 +40,28 @@ function App() {
     justifyContent: "center",
     alignItems: "center",
     color: "white",
+    // pointerEvents: "none",
+  };
+
+  const eventStyle = {
     pointerEvents: "none",
   };
 
   return (
     <div style={container}>
-      <div style={introStyle}>
-        <Intro />
+      <div
+        style={{
+          ...introStyle,
+          ...(currentPage === "intro" ? eventStyle : {}),
+        }}
+      >
+        {currentPage === "intro" && (
+          <Intro onComplete={() => setCurrentPage("verification")} />
+        )}
+
+        {currentPage === "verification" && (
+          <Vertification setCurrentPage={setCurrentPage} />
+        )}
       </div>
       <div style={canvasStyle}>
         <Canvas>
