@@ -11,7 +11,7 @@ input[type="date"] {
   background-color: white;
   border: 1px solid #ccc;
   border-radius: 5px;
-  cursor: pointer; /* 클릭 가능함을 나타냄 */
-  z-index: 1; /* 다른 요소와 겹치지 않도록 */
+  cursor: pointer;
+  z-index: 1;
   position: relative;
 }
